@@ -2,14 +2,18 @@ package com.audition;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
+@TestPropertySource("classpath:application.yml")
 class AuditionApplicationTests {
-
-    // TODO implement unit test. Note that an applicant should create additional unit tests as required.
 
     @Test
     void contextLoads() {
     }
 
+    @Test
+    public void testMain() {
+        AuditionApplication.main(new String[]{});
+    }
 }

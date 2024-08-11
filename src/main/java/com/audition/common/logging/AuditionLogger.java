@@ -58,12 +58,14 @@ public class AuditionLogger {
     }
 
     private String createStandardProblemDetailMessage(final ProblemDetail standardProblemDetail) {
-        // TODO Add implementation here.
-        return StringUtils.EMPTY;
+        if (null == standardProblemDetail) {
+            return StringUtils.EMPTY;
+        }
+        return String.format("title: %s; error-code: %s; error-message %s", standardProblemDetail.getTitle(),
+            standardProblemDetail.getStatus(), standardProblemDetail.getDetail());
     }
 
     private String createBasicErrorResponseMessage(final Integer errorCode, final String message) {
-        // TODO Add implementation here.
-        return StringUtils.EMPTY;
+        return String.format("error-code: %s; error-message %s", errorCode, message);
     }
 }
