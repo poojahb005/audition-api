@@ -18,7 +18,7 @@ public class SecurityConfig {
                 authorizeRequests
                     // Allow unauthenticated access to info, health, api endpoints
                     .requestMatchers("/actuator/info", "/actuator/health").permitAll()
-                    .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                    .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/api/**").permitAll()
                     .anyRequest().authenticated() // other endpoints are secured
             ).httpBasic();
         return http.build();

@@ -26,7 +26,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*' #allowed all actuator endpoints and secured using spring security except for info and health
+        include: '*' #secured endpoints other than info, health using spring security.
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

@@ -27,14 +27,15 @@ public class WebServiceConfiguration implements WebMvcConfigurer {
 
     private static final String YEAR_MONTH_DAY_PATTERN = "yyyy-MM-dd";
 
+    /**
+     * custom object mapper configuration with, 1. allows for date format as yyyy-MM-dd, 2. Does not fail on unknown
+     * properties, 3. maps to camelCase, 4. Does not include null values or empty values, 5. does not write datas as
+     * timestamps.
+     *
+     * @return object mapper
+     */
     @Bean
     public ObjectMapper objectMapper() {
-        //  configure Jackson Object mapper that
-        //  1. allows for date format as yyyy-MM-dd
-        //  2. Does not fail on unknown properties
-        //  3. maps to camelCase
-        //  4. Does not include null values or empty values
-        //  5. does not write datas as timestamps.
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setDateFormat(new SimpleDateFormat(YEAR_MONTH_DAY_PATTERN))
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
@@ -45,6 +46,9 @@ public class WebServiceConfiguration implements WebMvcConfigurer {
         return objectMapper;
     }
 
+    /**
+     * @return rest template
+     */
     @Bean
     public RestTemplate restTemplate() {
         final RestTemplate restTemplate = new RestTemplate(
@@ -79,7 +83,7 @@ public class WebServiceConfiguration implements WebMvcConfigurer {
     public void addInterceptors(final InterceptorRegistry registry) {
         registry.addInterceptor(responseHeaderInjector());
     }
-    
+
     private SimpleClientHttpRequestFactory createClientFactory() {
         final SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         requestFactory.setOutputStreaming(false);
